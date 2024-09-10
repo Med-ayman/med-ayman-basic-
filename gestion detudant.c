@@ -22,7 +22,7 @@ int main() {
 
     M = s / n;
 
-    printf("La moyenne des notes est : %.2f\n", M);
+    printf("La moyenne des notes est : %f\n", M);
 
     return 0;
 
