@@ -20,7 +20,7 @@ struct etudiant t1[100];
 int nombre_etudiants = 0;
 int dernier_numero = 1;
 
-// Fonction pour ajouter
+
 void ajouter() {
 
  struct etudiant e;
@@ -72,31 +72,6 @@ void statistiques() {
     // 1. Nombre total d'étudiants inscrits
     printf("Nombre total d'etudiants inscrits : %d\n", nombre_etudiants);
 
-    // 2. Nombre d'étudiants par département
-    char departements[100][50];
-    int nombre_departements = 0;
-    int nombre_etudiants_par_departement[100] = {0};
-
-    for (int i = 0; i < nombre_etudiants; i++) {
-        int trouve = 0;
-        for (int j = 0; j < nombre_departements; j++) {
-            if (strcmp(departements[j], t1[i].departement) == 0) {
-                nombre_etudiants_par_departement[j]++;
-                trouve = 1;
-                break;
-            }
-        }
-        if (!trouve) {
-            strcpy(departements[nombre_departements], t1[i].departement);
-            nombre_etudiants_par_departement[nombre_departements]++;
-            nombre_departements++;
-        }
-    }
-
-    printf("Nombre d'etudiants par departement:\n");
-    for (int i = 0; i < nombre_departements; i++) {
-        printf("Département '%s': %d étudiants\n", departements[i], nombre_etudiants_par_departement[i]);
-    }
 
     // 3. Afficher les étudiants ayant une moyenne générale supérieure à un certain seuil
     float seuil;
@@ -199,7 +174,7 @@ void calculer_moyennes() {
     int compteur_universite = 0;
     float somme_notes_par_departement[100] = {0};
     int compteur_par_departement[100] = {0};
-    char departements[100][50];
+    char departements[50];
     int nombre_departements = 0;
 
     for (int i = 0; i < nombre_etudiants; i++) {
@@ -318,3 +293,6 @@ int main() {
 
     return 0;
 }
+
+   
+      
