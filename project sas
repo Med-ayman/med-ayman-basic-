@@ -169,54 +169,32 @@ void afficher_tous_les_etudiants() {
 }
 
 // Fonction pour calculer les moyennes
-void calculer_moyennes() {
-    float somme_notes_universite = 0;
-    int compteur_universite = 0;
-    float somme_notes_par_departement[100] = {0};
-    int compteur_par_departement[100] = {0};
-    char departements[50];
-    int nombre_departements = 0;
+void calculer_moyennes(struct etudiant t1[],int nombre_etudiants) {
+    float depmoyndener=0,unvrsmoyngener=0;
+    int conteur=0;
+    char dep[100];
 
-    for (int i = 0; i < nombre_etudiants; i++) {
-        // Calcul de la moyenne générale de l'université
-        somme_notes_universite += t1[i].note_generale;
-        compteur_universite++;
+    printf("entrer le deperetement:");
+    scanf("%s",dep);
 
-        // Calcul de la moyenne par département
-        int trouve = 0;
-        for (int j = 0; j < nombre_departements; j++) {
-            if (strcmp(departements[j], t1[i].departement) == 0) {
-                somme_notes_par_departement[j] += t1[i].note_generale;
-                compteur_par_departement[j]++;
-                trouve = 1;
-                break;
-            }
-        }
-        if (!trouve) {
-            strcpy(departements[nombre_departements], t1[i].departement);
-            somme_notes_par_departement[nombre_departements] = t1[i].note_generale;
-            compteur_par_departement[nombre_departements] = 1;
-            nombre_departements++;
-        }
+    for(int i=0;i<nombre_etudiants;i++){
+
+        if (strcmp(dep,t1[i].departement)==0){
+                depmoyndener+=t1[i].note_generale;
+               conteur++;
+               }
+    unvrsmoyngener+=t1[i].note_generale;
+    }
+    unvrsmoyngener=unvrsmoyngener/nombre_etudiants;
+
+    depmoyndener=depmoyndener/nombre_etudiants;
+
+    printf("moyenne geenerale de l unnersite:%f\n", unvrsmoyngener);
+    printf("moyenne geenerale de deparetement :%f\n",depmoyndener);
+
+
     }
 
-    // Affichage de la moyenne générale
-    if (compteur_universite > 0) {
-        float moyenne_universite = somme_notes_universite / compteur_universite;
-        printf("Moyenne générale de l'université: %f\n", moyenne_universite);
-    } else {
-        printf("Aucun étudiant enregistre.\n");
-    }
-
-    // Affichage des moyennes par département
-    printf("Moyennes par departement:\n");
-    for (int i = 0; i < nombre_departements; i++) {
-        if (compteur_par_departement[i] > 0) {
-            float moyenne_departement = somme_notes_par_departement[i] / compteur_par_departement[i];
-            printf("Departement '%s': %f\n", departements[i], moyenne_departement);
-        }
-    }
-}
 
 // Fonction pour rechercher un étudiant par son nom
 void rechercher_etudiant() {
@@ -275,7 +253,7 @@ int main() {
                 afficher_tous_les_etudiants();
                 break;
             case 4:
-                calculer_moyennes();
+                calculer_moyennes(t1,nombre_etudiants);
                 break;
             case 5:
                 rechercher_etudiant();
@@ -293,6 +271,5 @@ int main() {
 
     return 0;
 }
-
    
       
