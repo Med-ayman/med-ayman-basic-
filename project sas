@@ -89,12 +89,12 @@ void statistiques() {
             printf("Note générale: %f\n", t1[i].note_generale);
             printf(".........................................\n");
             trouve = 1;
-        }
-    }
-
-    if (!trouve) {
+        }else if (t1[i].note_generale > seuil && i==nombre_etudiants-1 ) {
         printf("Aucun etudiant n'a une note superieure a %f\n", seuil);
     }
+    }
+
+
 }
 
 // Fonction pour modifier ou supprimer un étudiant
@@ -216,12 +216,12 @@ void rechercher_etudiant() {
             printf("Note generale: %f\n", t1[i].note_generale);
             printf("..........................................\n");
             trouve = 1;
-        }
-    }
-
-    if (!trouve) {
+        }else if (strcmp(t1[i].nom, nom) != 0 && i==nombre_etudiants-1) {
         printf("Aucun étudiant trouve avec ce nom\n");
     }
+    }
+
+
 }
 
 // Fonction principale pour le menu
@@ -271,5 +271,3 @@ int main() {
 
     return 0;
 }
-   
-      
