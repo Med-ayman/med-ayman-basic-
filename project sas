@@ -64,9 +64,9 @@ void ajouter() {
     printf("Etudiant ajoute avec succes\n");
 }
 
-// Fonction pour afficher des statistiques
+
 void statistiques() {
-    printf("\nStatistiques des étudiants :\n");
+    printf("\nStatistiques des etudiants :\n");
 
     // 1. Nombre total d'étudiants inscrits
     printf("Nombre total d'etudiants inscrits : %d\n", nombre_etudiants);
@@ -78,8 +78,8 @@ void statistiques() {
     scanf("%f", &seuil);
 
     printf("Etudiants ayant une note superieure à %f:\n", seuil);
-    int trouve = 0;
     for (int i = 0; i < nombre_etudiants; i++) {
+
         if (t1[i].note_generale > seuil) {
             printf("Numéro: %d\n", t1[i].numero);
             printf("Nom: %s\n", t1[i].nom);
@@ -87,8 +87,8 @@ void statistiques() {
             printf("Département: %s\n", t1[i].departement);
             printf("Note générale: %f\n", t1[i].note_generale);
             printf(".........................................\n");
-            trouve = 1;
-        }else if (t1[i].note_generale > seuil && i==nombre_etudiants-1 ) {
+            ;}
+            else if (t1[i].note_generale < seuil ) {
         printf("Aucun etudiant n'a une note superieure a %f\n", seuil);
     }
     }
@@ -96,7 +96,7 @@ void statistiques() {
 
 }
 
-// Fonction pour modifier ou supprimer un étudiant
+
 void modifier_ou_supprimer_etudiant(int numero) {
 
     for (int i = 0; i < nombre_etudiants; i++) {
@@ -149,7 +149,7 @@ void modifier_ou_supprimer_etudiant(int numero) {
     printf("Etudiant non trouve\n");
 }
 
-// Fonction pour afficher tous les étudiants
+
 void afficher_tous_les_etudiants() {
     if (nombre_etudiants == 0) {
         printf("Aucun etudiant enregistre.\n");
@@ -167,7 +167,7 @@ void afficher_tous_les_etudiants() {
     }
 }
 
-// Fonction pour calculer les moyennes
+
 void calculer_moyennes(struct etudiant t1[],int nombre_etudiants) {
     float depmoyne=0,unvrsmoyne=0;
     int conteur=0;
@@ -182,7 +182,7 @@ void calculer_moyennes(struct etudiant t1[],int nombre_etudiants) {
                 depmoyne+=t1[i].note_generale;
                conteur++;
                }
-    unvrsmoyne+=t1[i].note_generale;
+    unvrsmoyne=unvrsmoyne+t1[i].note_generale;
     }
     unvrsmoyne=unvrsmoyne/nombre_etudiants;
 
@@ -195,15 +195,16 @@ void calculer_moyennes(struct etudiant t1[],int nombre_etudiants) {
     }
 
 
-// Fonction pour rechercher un étudiant par son nom
-void rechercher_etudiant() {
-    char nom[50];
-    printf("Entrez le nom de l'etudiant: ");
-    scanf("%s", nom);
 
-    int trouve = 0;
+
+void rechercher_etudiant() {
+    char le_nom[50];
+    printf("Entrez le nom de l'etudiant: ");
+    scanf("%s", le_nom);
+
+
     for (int i = 0; i < nombre_etudiants; i++) {
-        if (strcmp(t1[i].nom, nom) == 0) {
+        if (strcmp(t1[i].nom,le_nom) == 0) {
             printf("Numero: %d\n", t1[i].numero);
             printf("Nom: %s\n", t1[i].nom);
             printf("Prenom: %s\n", t1[i].prenom);
@@ -214,16 +215,16 @@ void rechercher_etudiant() {
                    t1[i].date_naissance.annee);
             printf("Note generale: %f\n", t1[i].note_generale);
             printf("..........................................\n");
-            trouve = 1;
-        }else if (strcmp(t1[i].nom, nom) != 0 && i==nombre_etudiants-1) {
-        printf("Aucun étudiant trouve avec ce nom\n");
+
+        }else if (strcmp(t1[i].nom,le_nom) != 0) {
+        printf("Aucun etudiant trouve avec ce nom\n");
     }
     }
 
 
 }
 
-// Fonction principale pour le menu
+
 int main() {
     int choix, numero;
 
@@ -234,7 +235,7 @@ int main() {
         printf("3. Afficher tous les etudiants\n");
         printf("4. Calculer les moyennes\n");
         printf("5. Rechercher un etudiant\n");
-        printf("6. Afficher les statistiques\n");  // Nouvelle option pour les statistiques
+        printf("6. Afficher les statistiques\n");
         printf("7. Quitter\n");
         printf("Votre choix: ");
         scanf("%d", &choix);
@@ -258,10 +259,10 @@ int main() {
                 rechercher_etudiant();
                 break;
             case 6:
-                statistiques();  // Appel de la nouvelle fonction
+                statistiques();
                 break;
             case 7:
-                printf("Au revoir !\n");
+                printf("merci !\n");
                 break;
             default:
                 printf("Choix invalide.\n");
