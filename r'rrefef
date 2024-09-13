@@ -20,10 +20,10 @@ struct etudiant t1[100];
 int nombre_etudiants = 0;
 int dernier_numero = 1;
 
+
 void ajouter() {
 
  struct etudiant e;
-
 
     e.numero = dernier_numero;
     dernier_numero++;
@@ -34,10 +34,10 @@ void ajouter() {
     scanf("%s", e.nom);
 
     printf("Prenom: ");
-    scanf("%s",e.prenom);
+    scanf("%s", e.prenom);
 
     printf("Departement: ");
-    scanf("%s",e.departement);
+    scanf("%s", e.departement);
 
     printf("Date de naissance:\n");
 
@@ -50,6 +50,7 @@ void ajouter() {
     printf("Annee: ");
     scanf("%d", &e.date_naissance.annee);
 
+    // Vérification de la note générale entre 0 et 20
     do {
         printf("Note generale : ");
         scanf("%f", &e.note_generale);
@@ -60,55 +61,96 @@ void ajouter() {
 
     t1[nombre_etudiants] = e;
     nombre_etudiants++;
-    printf("Etudiant est ajoute \n");
+    printf("Etudiant ajoute avec succes\n");
 }
 
 
-   void modifier_ou_supprimer_etudiant(int numero){
-int i;
-   for(i=0;i<nombre_etudiants;i++);
-   if (t1[i].numero == numero){
-   int choix;
-   printf("choisi 1 pour modifie");
-   printf("choisi 2 pour suprimer");}
-int choix;
-   if (choix==1){
-    printf("Numero d'etudiant (automatique): %d\n", t1[i].numero);
+void statistiques() {
+    printf("\nStatistiques des etudiants :\n");
 
-    printf("Nom: ");
-    scanf("%s",t1[i].nom);
-
-    printf("Prenom: ");
-    scanf("%s",t1[i].prenom);
-
-    printf("Departement: ");
-    scanf("%s",t1[i].departement);
-
-    printf("Date de naissance:\n");
-
-    printf("Jour: ");
-    scanf("%d", &t1[i].date_naissance.jour);
-
-    printf("Mois: ");
-    scanf("%d", &t1[i].date_naissance.mois);
-
-    printf("Annee: ");
-    scanf("%d", &t1[i].date_naissance.annee);
-
-    printf("la note:");
-    scanf("%f", &t1[i].note_generale);
-    printf("ajouté succés");}
+    // 1. Nombre total d'étudiants inscrits
+    printf("Nombre total d'etudiants inscrits : %d\n", nombre_etudiants);
 
 
-    else if (choix==2){
-            for(int j=i;j<nombre_etudiants-1;j++){
-                t1[j]=t1[j+1];
+    // 3. Afficher les étudiants ayant une moyenne générale supérieure à un certain seuil
+    float seuil;
+    printf("Entrez le seuil de note generale : ");
+    scanf("%f", &seuil);
+
+    printf("Etudiants ayant une note superieure à %f:\n", seuil);
+    for (int i = 0; i < nombre_etudiants; i++) {
+
+        if (t1[i].note_generale > seuil) {
+            printf("Numéro: %d\n", t1[i].numero);
+            printf("Nom: %s\n", t1[i].nom);
+            printf("Prénom: %s\n", t1[i].prenom);
+            printf("Département: %s\n", t1[i].departement);
+            printf("Note générale: %f\n", t1[i].note_generale);
+            printf(".........................................\n");
+            ;}
+            else if (t1[i].note_generale < seuil ) {
+        printf("Aucun etudiant n'a une note superieure a %f\n", seuil);
+    }
+    }
+
+
+}
+
+
+void modifier_ou_supprimer_etudiant(int numero) {
+
+    for (int i = 0; i < nombre_etudiants; i++) {
+        if (t1[i].numero == numero) {
+
+            int choix;
+           printf("Choisissez une option: ");
+            printf("1. Modifier les informations\n");
+            printf("2. Supprimer l'etudiant\n");
+            scanf("%d", &choix);
+
+            if (choix == 1) {
+
+                printf("Nouveau nom: ");
+                scanf("%s", t1[i].nom);
+
+                printf("Nouveau prenom: ");
+                scanf("%s", t1[i].prenom);
+
+                printf("Nouveau departement: ");
+                scanf("%s", t1[i].departement);
+
+                // Mise à jour de la date de naissance
+                printf("Nouvelle date de naissance:\n");
+
+                printf("Jour: ");
+                scanf("%d", &t1[i].date_naissance.jour);
+
+                printf("Mois: ");
+                scanf("%d", &t1[i].date_naissance.mois);
+
+                printf("Annee: ");
+                scanf("%d", &t1[i].date_naissance.annee);
+
+                printf("Nouvelle note generale: ");
+                scanf("%f", &t1[i].note_generale);
+                printf("Informations modifiées avec succes\n");
+            }
+            else if (choix == 2) {
+                // Supprimer l'étudiant
+                for (int j = i; j < nombre_etudiants - 1; j++) {
+                    t1[j] = t1[j + 1];
+                }
                 nombre_etudiants--;
-                printf("supprumer et effectue");}
-        }}
+                printf("Etudiant supprime avec succes\n");
+            }
+            return 0 ;
+        }
+    }
+    printf("Etudiant non trouve\n");
+}
 
 
- void afficher_tous_les_etudiants() {
+void afficher_tous_les_etudiants() {
     if (nombre_etudiants == 0) {
         printf("Aucun etudiant enregistre.\n");
         return 0 ;
@@ -124,3 +166,98 @@ int choix;
         printf(".......................................\n");
     }
 }
+
+
+void calculer_moyennes(struct etudiant t1[],int nombre_etudiants) {
+    float unvrsmoyne=0;
+    int conteur=0;
+    char dep[100];
+
+    for(int i=0;i<nombre_etudiants;i++){
+
+    unvrsmoyne=unvrsmoyne+t1[i].note_generale;
+    }
+    unvrsmoyne=unvrsmoyne/nombre_etudiants;
+
+    printf("moyenne geenerale de l unnersite:%f\n", unvrsmoyne);
+
+    }
+
+
+
+
+void rechercher_etudiant() {
+    char le_nom[50];
+    printf("Entrez le nom de l'etudiant: ");
+    scanf("%s", le_nom);
+
+
+    for (int i = 0; i < nombre_etudiants; i++) {
+        if (strcmp(t1[i].nom,le_nom) == 0) {
+            printf("Numero: %d\n", t1[i].numero);
+            printf("Nom: %s\n", t1[i].nom);
+            printf("Prenom: %s\n", t1[i].prenom);
+            printf("Département: %s\n", t1[i].departement);
+            printf("Date de naissance: %d/%d/%d\n",
+                   t1[i].date_naissance.jour,
+                   t1[i].date_naissance.mois,
+                   t1[i].date_naissance.annee);
+            printf("Note generale: %f\n", t1[i].note_generale);
+            printf("..........................................\n");
+
+        }else if (strcmp(t1[i].nom,le_nom) != 0) {
+        printf("Aucun etudiant trouve avec ce nom\n");
+    }
+    }
+
+
+}
+
+
+int main() {
+    int choix, numero;
+
+    do {
+        printf("\nMenu:\n");
+        printf("1. Ajouter un etudiant\n");
+        printf("2. Modifier ou supprimer un etudiant\n");
+        printf("3. Afficher tous les etudiants\n");
+        printf("4. Calculer les moyennes\n");
+        printf("5. Rechercher un etudiant\n");
+        printf("6. Afficher les statistiques\n");
+        printf("7. Quitter\n");
+        printf("Votre choix: ");
+        scanf("%d", &choix);
+
+        switch (choix) {
+            case 1:
+                ajouter();
+                break;
+            case 2:
+                printf("Entrez le numero de l'etudiant: ");
+                scanf("%d", &numero);
+                modifier_ou_supprimer_etudiant(numero);
+                break;
+            case 3:
+                afficher_tous_les_etudiants();
+                break;
+            case 4:
+                calculer_moyennes(t1,nombre_etudiants);
+                break;
+            case 5:
+                rechercher_etudiant();
+                break;
+            case 6:
+                statistiques();
+                break;
+            case 7:
+                printf("merci !\n");
+                break;
+            default:
+                printf("Choix invalide.\n");
+        }
+    } while (choix != 7);
+
+    return 0;
+}
+
