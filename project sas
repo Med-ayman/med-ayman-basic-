@@ -25,9 +25,8 @@ void ajouter() {
 
  struct etudiant e;
 
-    // Génération automatique du numéro unique
     e.numero = dernier_numero;
-    dernier_numero++;  // Incrémenter pour le prochain étudiant
+    dernier_numero++;
 
     printf("Numero d'etudiant (automatique): %d\n", e.numero);
 
@@ -170,7 +169,7 @@ void afficher_tous_les_etudiants() {
 
 // Fonction pour calculer les moyennes
 void calculer_moyennes(struct etudiant t1[],int nombre_etudiants) {
-    float depmoyndener=0,unvrsmoyngener=0;
+    float depmoyne=0,unvrsmoyne=0;
     int conteur=0;
     char dep[100];
 
@@ -180,17 +179,17 @@ void calculer_moyennes(struct etudiant t1[],int nombre_etudiants) {
     for(int i=0;i<nombre_etudiants;i++){
 
         if (strcmp(dep,t1[i].departement)==0){
-                depmoyndener+=t1[i].note_generale;
+                depmoyne+=t1[i].note_generale;
                conteur++;
                }
-    unvrsmoyngener+=t1[i].note_generale;
+    unvrsmoyne+=t1[i].note_generale;
     }
-    unvrsmoyngener=unvrsmoyngener/nombre_etudiants;
+    unvrsmoyne=unvrsmoyne/nombre_etudiants;
 
-    depmoyndener=depmoyndener/nombre_etudiants;
+    depmoyne=depmoyne/nombre_etudiants;
 
-    printf("moyenne geenerale de l unnersite:%f\n", unvrsmoyngener);
-    printf("moyenne geenerale de deparetement :%f\n",depmoyndener);
+    printf("moyenne geenerale de l unnersite:%f\n", unvrsmoyne);
+    printf("moyenne geenerale de deparetement :%f\n",depmoyne);
 
 
     }
